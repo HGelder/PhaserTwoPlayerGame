@@ -1,4 +1,4 @@
-var width = 960;
+var width = 960; 
 var height = 540;
 
 var game = new Phaser.Game(width, height, Phaser.AUTO, '', 
@@ -42,6 +42,8 @@ function preload(){
     game.load.image('labelPlayer2', 'assets/labelPlayer2.png');
     game.load.image('player1' , 'assets/playerTemplate.png');
     game.load.image('player2' , 'assets/playerTemplate.png');
+    
+    game.load.image('box' , 'assets/boxTemplate.png');
     
     game.load.spritesheet('spritesheetHealth', 'assets/spritesheetHealth.png', 180, 60, 7);
       
@@ -119,6 +121,8 @@ function play(){
     healthPlayer2.visible = true;
     player1.visible = true;
     player2.visible = true;
+    
+    spawnBoxes();
     
 }
 
