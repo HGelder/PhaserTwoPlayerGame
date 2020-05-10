@@ -1,5 +1,5 @@
-function spawnBoxes(){
-    
+function spawnBoxes(){  
+     
     var allXPoints = [ 150, 210, 270, 330, 390, 450, 510, 570, 630, 690, 750, 810 ];
     var allYPoints = [ 150, 210, 270, 330, 390 ];
     
