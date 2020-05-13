@@ -1,4 +1,4 @@
-function spawnBoxes(){  
+function spawnBoxes(){     
      
     var allXPoints = [ 150, 210, 270, 330, 390, 450, 510, 570, 630, 690, 750, 810 ];
     var allYPoints = [ 150, 210, 270, 330, 390 ];
@@ -13,6 +13,7 @@ function spawnBoxes(){
         } else {
             var box = game.add.sprite(pointX, pointY, 'box');
             box.anchor.setTo(0.5, 0.5);
+            boxGroup.add(box);
         }
     }
     
