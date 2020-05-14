@@ -10,6 +10,8 @@ var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, '',
 
 var playing = false;
 var winner = "";
+var p1win;
+var p2win;
 var boxGroup;
 
 var backgroundMenu;
@@ -53,7 +55,10 @@ function preload(){
     
     game.load.image('bulletP1', 'assets/bulletPlayer1.png');
     game.load.image('bulletP2', 'assets/bulletPlayer2.png');
-    game.load.image('box' , 'assets/boxTemplate.png');
+    game.load.image('box' , 'assets/metalBox.png');
+    
+    game.load.image('p1win', 'assets/player1win.png');
+    game.load.image('p2win', 'assets/player2win.png');
     
     game.load.spritesheet('spritesheetHealth', 'assets/spritesheetHealth.png', 180, 60, 7);
       
@@ -76,6 +81,13 @@ function create(){
     labelPlayer2.anchor.setTo(0.5, 0.5);
     labelPlayer1.visible = false;
     labelPlayer2.visible = false;
+    
+    p1win = game.add.sprite(WIDTH/2, HEIGHT/2 - 125, 'p1win');
+    p2win = game.add.sprite(WIDTH/2, HEIGHT/2 - 125, 'p2win');
+    p1win.anchor.setTo(0.5, 0.5);
+    p2win.anchor.setTo(0.5, 0.5);
+    p1win.visible = false;
+    p2win.visible = false;
     
     healthPlayer1 = game.add.sprite(WIDTH/2 - 380, HEIGHT/7, 'spritesheetHealth');
     healthPlayer1.anchor.setTo(0.5, 0.5);
@@ -133,6 +145,10 @@ function update(){
             p1Health -= 1;                                        // TESTING ONLY //
             healthPlayer1.frame += 1;                             // TESTING ONLY //
         }                                                         // TESTING ONLY //
+        if (game.input.keyboard.justPressed(Phaser.Keyboard.Y)) { // TESTING ONLY // 
+            p2Health -= 1;                                        // TESTING ONLY //
+            healthPlayer2.frame += 1;                             // TESTING ONLY //
+        }                                                         // TESTING ONLY //
         
         if (p1Health == 0) {
             winner = "player 2";
@@ -163,8 +179,10 @@ function play(){
     healthPlayer2.visible = true;
     player1.visible = true;
     player2.visible = true;
+    p1win.visible = false;
+    p2win.visible = false;
     healthPlayer1.frame = 0;
-    healthPlayer1.frame = 0;
+    healthPlayer2.frame = 0;
     p1Health = 6; 
     p2Health = 6; 
     
@@ -193,10 +211,10 @@ function exit(){
     
     if (winner === "player 1") {
         console.log("Player 1 wins!");
-        // play win screen - player 1
+        p1win.visible = true;
     } else if (winner === "player 2") {
         console.log("Player 2 wins!");
-        // play win screen - player 2
+        p2win.visible = true;
     }
        
 }
