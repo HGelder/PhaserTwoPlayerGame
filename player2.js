@@ -1,4 +1,4 @@
-function updateP2(){      
+function updateP2(){       
     
     if (p2Shoot.isDown){
         shootP2();
@@ -24,16 +24,9 @@ function updateP2(){
     
     if (player2.y < 90) { player2.y = 90; }
     
-    //if (player is hit by bullet) {
-        
-        //p2Health -= 1;
-        //healthPlayer2.frame += 1;
-        
-    //}
-    
 }
 
-function shootP2(){
+function shootP2(){ 
     
     var bulletP2; 
     

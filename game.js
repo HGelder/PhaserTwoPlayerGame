@@ -1,4 +1,4 @@
-var WIDTH = 960;       
+var WIDTH = 960;        
 var HEIGHT = 540;
 
 var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, '', 
@@ -128,6 +128,8 @@ function create(){
     p2BulletsGroup.forEach(function(bulletP2){bulletP2.anchor.setTo(0.5, 0.5)}, this);
     
     boxGroup = game.add.group();
+    boxGroup.createMultiple(10, 'box');
+    boxGroup.forEach(function(box){box.anchor.setTo(0.5, 0.5)}, this);
     
 }
 
@@ -139,16 +141,14 @@ function update(){
         updateP2();
         
         p1BulletsGroup.forEachAlive(updateBulletP1, this);
+        p1BulletsGroup.forEachAlive(hitCheck, this, player2);
         p2BulletsGroup.forEachAlive(updateBulletP2, this);
+        p2BulletsGroup.forEachAlive(hitCheck, this, player1);
         
-        if (game.input.keyboard.justPressed(Phaser.Keyboard.T)) { // TESTING ONLY // 
-            p1Health -= 1;                                        // TESTING ONLY //
-            healthPlayer1.frame += 1;                             // TESTING ONLY //
-        }                                                         // TESTING ONLY //
-        if (game.input.keyboard.justPressed(Phaser.Keyboard.Y)) { // TESTING ONLY // 
-            p2Health -= 1;                                        // TESTING ONLY //
-            healthPlayer2.frame += 1;                             // TESTING ONLY //
-        }                                                         // TESTING ONLY //
+        for (var i = 0; i < boxGroup.length; i++) {
+            p1BulletsGroup.forEachAlive(hitCheck, this, boxGroup[i]);
+            p2BulletsGroup.forEachAlive(hitCheck, this, boxGroup[i]);
+        }
         
         if (p1Health == 0) {
             winner = "player 2";
@@ -164,6 +164,37 @@ function update(){
         }  
     }
     
+}
+
+function hitCheck(sprite1, sprite2) { // NEW
+    
+    var hit = false;
+    
+    if (sprite1.x < sprite2.x + sprite2.width &&
+        sprite1.y < sprite2.y + sprite2.height && 
+        sprite1.x + sprite2.width > sprite2.x &&
+        sprite1.y + sprite2.height > sprite2.y) {
+        
+        hit = true;
+        console.log("Collision!");
+        
+        if (sprite1.key === 'bulletP1' && sprite2.key === 'player2') {
+            p2Health -= 1;
+            healthPlayer2.frame += 1;
+            sprite1.kill();
+            
+        } else if (sprite1.key === 'bulletP2' && sprite2.key === 'player1') {
+            p1Health -= 1;
+            healthPlayer1.frame += 1;
+            sprite1.kill();
+            
+        } else {
+            sprite1.kill();
+        }
+    
+    }
+    
+    return hit;
 }
 
 function play(){

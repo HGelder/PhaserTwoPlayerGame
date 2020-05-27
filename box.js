@@ -10,10 +10,8 @@ function spawnBoxes(){
         
         if (pointX == 150 && pointY == 270 || pointX == 810 && pointY == 270) {
             // do nothing -> cannot place boxes in player's starting squares
-        } else {
-            var box = game.add.sprite(pointX, pointY, 'box');
-            box.anchor.setTo(0.5, 0.5);
-            boxGroup.add(box);
+        } else {  
+            boxGroup.getFirstDead(true, pointX, pointY);
         }
     }
     

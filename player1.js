@@ -1,4 +1,4 @@
-function updateP1(){      
+function updateP1(){       
     
     if (p1Shoot.isDown){
         shootP1();
@@ -23,13 +23,6 @@ function updateP1(){
     if (player1.y > 450) { player1.y = 450; }
     
     if (player1.y < 90) { player1.y = 90; }
-    
-    //if (player is hit by bullet) {
-        
-        //p1Health -= 1;
-        //healthPlayer1.frame += 1;
-        
-    //}
     
 }
 
