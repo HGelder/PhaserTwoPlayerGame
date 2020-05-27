@@ -145,11 +145,6 @@ function update(){
         p2BulletsGroup.forEachAlive(updateBulletP2, this);
         p2BulletsGroup.forEachAlive(hitCheck, this, player1);
         
-        for (var i = 0; i < boxGroup.length; i++) {
-            p1BulletsGroup.forEachAlive(hitCheck, this, boxGroup[i]);
-            p2BulletsGroup.forEachAlive(hitCheck, this, boxGroup[i]);
-        }
-        
         if (p1Health == 0) {
             winner = "player 2";
             player1.kill();
@@ -176,7 +171,6 @@ function hitCheck(sprite1, sprite2) { // NEW
         sprite1.y + sprite2.height > sprite2.y) {
         
         hit = true;
-        console.log("Collision!");
         
         if (sprite1.key === 'bulletP1' && sprite2.key === 'player2') {
             p2Health -= 1;
