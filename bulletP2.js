@@ -1,4 +1,4 @@
-function updateBulletP2(bulletP2) {
+function updateBulletP2(bulletP2) { 
      
      bulletP2.x -= 5;
      
@@ -6,8 +6,4 @@ function updateBulletP2(bulletP2) {
          bulletP2.kill();
      }
     
-     //if (bulletP2 collides with box) {
-         //bulletP2.kill();
-     //}
-  
  }
